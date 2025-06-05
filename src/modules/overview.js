@@ -32,7 +32,7 @@ export async function renderOverview(searchedLocation) {
         iconDiv.classList.add('icon-large');
         const iconName = currentConditions.icon;
         const icon = document.createElement('img');
-        icon.src = `assets/weather-icons/${iconName}.png`
+        icon.src = getIconPath(iconName);
         iconDiv.appendChild(icon);
         overviewDiv.appendChild(iconDiv);
 
@@ -41,4 +41,10 @@ export async function renderOverview(searchedLocation) {
         // Error Display
         console.log(error);
     }
+}
+
+function getIconPath(iconName) {
+    const icons = require.context('../assets/weather-icons', false, /\.png$/);
+    const iconPath = icons(`./${iconName}.png`);
+    return iconPath;
 }
