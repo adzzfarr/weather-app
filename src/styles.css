@@ -3,3 +3,46 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    transition: background 3s ease-in-out, opacity 1s ease-in-out;
+}
+
+.fade-transition {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
+}   
+
+.bg-default {   
+    background: linear-gradient(to top, #0f2027, #203a43, #2c5364)
+}
+
+.bg-day-clear {
+  background: linear-gradient(to top, #87cefa, #f0f8ff);
+}
+
+.bg-night-clear {
+  background: linear-gradient(to top, #001f3f, #0d1b2a);
+}
+
+.bg-rain {
+  background: linear-gradient(to top, #3a6073, #16222a);
+}
+
+.bg-snow {
+  background: linear-gradient(to top, #e0eafc, #cfdef3);
+}
+
+.bg-fog {
+  background: linear-gradient(to top, #c9d6ff, #e2e2e2);
+}

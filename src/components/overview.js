@@ -1,5 +1,5 @@
 // overview.js
-import { getWeatherData } from "../weather-data";
+import { getWeatherData } from "../modules/weather-data";
 
 export async function renderOverview(searchedLocation) {
     try {
@@ -13,7 +13,6 @@ export async function renderOverview(searchedLocation) {
         locationDiv.id = 'location';
         const resolvedAddress = weatherData.resolvedAddress;
         locationDiv.textContent = resolvedAddress;
-        overviewDiv.appendChild(locationDiv);
 
         const weatherConditions = document.createElement('div');
         weatherConditions.id = 'conditions';
@@ -26,14 +25,23 @@ export async function renderOverview(searchedLocation) {
         weatherConditions.appendChild(temp);
         weatherConditions.appendChild(feelsLike);
         weatherConditions.appendChild(conditions);
-        overviewDiv.appendChild(weatherConditions);
 
         const iconDiv = document.createElement('div');
         iconDiv.classList.add('icon-large');
         const iconName = currentConditions.icon;
         const icon = document.createElement('img');
-        icon.src = getIconPath(iconName);
+        try {    
+            const iconPath = await import(`../assets/weather-icons/${iconName}.png`);
+            icon.src = iconPath.default;
+        } catch (error) {
+            console.log(`Error: ${iconName} icon not found`);
+            console.log(error);
+        }
         iconDiv.appendChild(icon);
+
+        
+        overviewDiv.appendChild(locationDiv);
+        overviewDiv.appendChild(weatherConditions);
         overviewDiv.appendChild(iconDiv);
 
         return overviewDiv;
@@ -41,10 +49,4 @@ export async function renderOverview(searchedLocation) {
         // Error Display
         console.log(error);
     }
-}
-
-function getIconPath(iconName) {
-    const icons = require.context('../assets/weather-icons', false, /\.png$/);
-    const iconPath = icons(`./${iconName}.png`);
-    return iconPath;
 }
