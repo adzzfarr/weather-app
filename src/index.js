@@ -22,5 +22,11 @@ search.addEventListener('click', async () => {
     const hour = parseInt(dateTime.slice(0, 3));
     const isDaytime = hour >= 6 && hour <= 18; 
     const iconName = weatherData.currentConditions.icon;
-    updateBackground(iconName, isDaytime);
+    updateBackground(iconName, isDaytime);  
+
+    if (isDaytime) {
+        overview.className = 'text-dark';
+    } else {
+        overview.className = 'text-light';
+    }
 });

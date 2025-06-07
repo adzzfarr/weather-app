@@ -1,17 +1,70 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.text-light {
+  color: #f0f0f0;
+}
+
+.text-dark {
+  color: #1a1a1a;
+}
+
+#searchbar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+input {
+  padding-left: 24px;
+  color: #e0eafc;
+  width: 30%;
+  background-color: #001f3f;
+  height: 3rem;
+  border-radius: 2rem;
+  border: 0.1rem solid #e0eafc;
+}
+
+input::placeholder {
+  color: #c9d6ff;
+  opacity: 0.25;
+}
+
+input::after {
+  border: none;
+}
+
+#search-button {
+  width: 7.5%;
+  background-color: #001f3f;
+  height: 3rem;
+  border-radius: 2rem;
+  border: 0.1rem solid #e0eafc;
+  color: #e0eafc;
+}
+
+
+
 #background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    transition: background 3s ease-in-out, opacity 1s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  transition: background 3s ease-in-out, opacity 1s ease-in-out;
 }
 
 .fade-transition {

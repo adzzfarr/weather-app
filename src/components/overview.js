@@ -8,6 +8,7 @@ export async function renderOverview(searchedLocation) {
 
         const overviewDiv = document.createElement('div');
         overviewDiv.id = 'overview';
+        overviewDiv.className = '';
 
         const locationDiv = document.createElement('div');
         locationDiv.id = 'location';
@@ -37,8 +38,7 @@ export async function renderOverview(searchedLocation) {
             console.log(`Error: ${iconName} icon not found`);
             console.log(error);
         }
-        iconDiv.appendChild(icon);
-
+        iconDiv.appendChild(icon);  
         
         overviewDiv.appendChild(locationDiv);
         overviewDiv.appendChild(weatherConditions);
