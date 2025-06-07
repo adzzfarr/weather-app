@@ -10,22 +10,29 @@ export async function renderOverview(searchedLocation) {
         overviewDiv.id = 'overview';
         overviewDiv.className = '';
 
+        const textDiv = document.createElement('div');
+        textDiv.id = 'overview-text';
+
         const locationDiv = document.createElement('div');
-        locationDiv.id = 'location';
+        locationDiv.id = 'location-text';
         const resolvedAddress = weatherData.resolvedAddress;
         locationDiv.textContent = resolvedAddress;
+        textDiv.appendChild(locationDiv);
 
-        const weatherConditions = document.createElement('div');
-        weatherConditions.id = 'conditions';
-        const temp = document.createElement('h2');
-        temp.textContent = currentConditions.temp;
+        const temperatures = document.createElement('div');
+        temperatures.id = 'temperatures-text';
+        const temp = document.createElement('span');
+        temp.textContent = currentConditions.temp + '°';
         const feelsLike = document.createElement('span');
-        feelsLike.textContent = currentConditions.feelsLike;
-        const conditions = document.createElement('h3');
-        conditions.textContent = currentConditions.conditions;
-        weatherConditions.appendChild(temp);
-        weatherConditions.appendChild(feelsLike);
-        weatherConditions.appendChild(conditions);
+        feelsLike.textContent = 'Feels like ' + currentConditions.feelslike + '°';
+        temperatures.appendChild(temp);
+        temperatures.appendChild(feelsLike);
+        textDiv.appendChild(temperatures);
+
+        const conditionsDiv = document.createElement('div');
+        conditionsDiv.id = 'conditions-text'
+        conditionsDiv.textContent = currentConditions.conditions;
+        textDiv.appendChild(conditionsDiv);
 
         const iconDiv = document.createElement('div');
         iconDiv.classList.add('icon-large');
@@ -40,8 +47,7 @@ export async function renderOverview(searchedLocation) {
         }
         iconDiv.appendChild(icon);  
         
-        overviewDiv.appendChild(locationDiv);
-        overviewDiv.appendChild(weatherConditions);
+        overviewDiv.appendChild(textDiv);   
         overviewDiv.appendChild(iconDiv);
 
         return overviewDiv;

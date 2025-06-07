@@ -15,7 +15,7 @@ export function updateBackground(iconName, isDaytime) {
 
         background.classList.add("fade-transition");
 
-        if (iconName.includes("rain")) {
+        if (iconName.includes("rain") || iconName.includes("showers") || iconName.includes("thunder")) {
             background.classList.add("bg-rain");
         } else if (iconName.includes("snow")) {
             background.classList.add("bg-snow");

@@ -24,9 +24,9 @@ search.addEventListener('click', async () => {
     const iconName = weatherData.currentConditions.icon;
     updateBackground(iconName, isDaytime);  
 
-    if (isDaytime) {
-        overview.className = 'text-dark';
-    } else {
+    if (!isDaytime || weatherData.currentConditions.icon.includes('rain') || weatherData.currentConditions.icon.includes('thunder')) {
         overview.className = 'text-light';
+    } else {
+        overview.className = 'text-dark';
     }
 });
