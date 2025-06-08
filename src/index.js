@@ -3,20 +3,25 @@ import "./styles.css";
 import { getWeatherData } from "./modules/weather-data";
 import { renderOverview } from "./components/overview";
 import { updateBackground } from "./modules/update-background";
+import { renderHourlyForecast } from "./components/hourly-forecast";
 
 const content = document.getElementById('content');
 const input = document.querySelector('input');
 
 const search = document.getElementById('search-button');
 search.addEventListener('click', async () => {
+    content.innerHTML = '';
+
     const searchQuery = input.value.toString().trim();
 
     const weatherData = await getWeatherData(searchQuery);
     console.log(weatherData);
 
     const overview = await renderOverview(searchQuery);
-    content.innerHTML = '';
     content.appendChild(overview);
+
+    const hourlyForecast = await renderHourlyForecast(searchQuery);
+    content.appendChild(hourlyForecast);
 
     const dateTime = weatherData.currentConditions.datetime;
     const hour = parseInt(dateTime.slice(0, 3));

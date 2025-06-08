@@ -19,6 +19,11 @@ export async function renderOverview(searchedLocation) {
         locationDiv.textContent = resolvedAddress;
         textDiv.appendChild(locationDiv);
 
+        const conditionsDiv = document.createElement('div');
+        conditionsDiv.id = 'conditions-text'
+        conditionsDiv.textContent = currentConditions.conditions;
+        textDiv.appendChild(conditionsDiv);
+
         const temperatures = document.createElement('div');
         temperatures.id = 'temperatures-text';
         const temp = document.createElement('span');
@@ -29,17 +34,12 @@ export async function renderOverview(searchedLocation) {
         temperatures.appendChild(feelsLike);
         textDiv.appendChild(temperatures);
 
-        const conditionsDiv = document.createElement('div');
-        conditionsDiv.id = 'conditions-text'
-        conditionsDiv.textContent = currentConditions.conditions;
-        textDiv.appendChild(conditionsDiv);
-
         const iconDiv = document.createElement('div');
         iconDiv.classList.add('icon-large');
         const iconName = currentConditions.icon;
         const icon = document.createElement('img');
         try {    
-            const iconPath = await import(`../assets/weather-icons/${iconName}.png`);
+            const iconPath = await import(`../assets/icons-svg/${iconName}.svg`);
             icon.src = iconPath.default;
         } catch (error) {
             console.log(`Error: ${iconName} icon not found`);
