@@ -15,6 +15,7 @@ export async function renderHourlyForecast(searchedLocation) {
         hourlyForecastDiv.id = 'hourly-forecast';
 
         const hourlyForecastText = document.createElement('span');
+        hourlyForecastText.id = 'hourly-forecast-title';
         hourlyForecastText.textContent = 'Hourly Forecast';
         hourlyForecastDiv.appendChild(hourlyForecastText)
 
