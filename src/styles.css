@@ -12,12 +12,16 @@
 }
 
 #app {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-areas: 
+    ". searchbar"
+    ". content";
+  grid-template-columns: 1fr 9fr;
+  grid-template-rows: 3rem 1fr;
   height: 100vh;
   width: 100vw;
   gap: 1rem;
-  padding: 1.5rem;
+  padding: 1.5rem 2rem;
 }
 
 .text-light {
@@ -29,20 +33,18 @@
 }
 
 #searchbar {
+  grid-area: searchbar;
   display: flex;
-  justify-content: center;
-  width: 100%;
   gap: 1rem;
 }
 
 input {
   padding-left: 24px;
   color: #e0eafc;
-  width: 30%;
   background-color: var(--component-color);
-  height: 3rem;
   border-radius: 2rem;
   border: none;
+  width: 50%;
 }
 
 input::placeholder {
@@ -56,29 +58,32 @@ input::after {
 
 #search-button {
   min-width: 96px;
-  width: 7.5%;
   background-color: var(--component-color);
-  height: 3rem;
   border-radius: 2rem;
   color: #e0eafc;
   border: none;
 }
 
 #content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
+  grid-area: content;
+  display: grid;
+  grid-template-areas: 
+    "       overview        daily-forecast"
+    "    hourly-forecast    daily-forecast"
+    "atmospheric-conditions daily-forecast";
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1rem;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 4rem);
 }
 
 #overview {
+  grid-area: overview;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 1rem 0 1rem 0;
-  width: 50%;
 }
 
 #overview-text, #temperatures-text {
@@ -111,13 +116,13 @@ input::after {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
-  height: auto;
+  height: 5rem;
+  width: auto;
 }
 
 img {
-  width: 100%;
-  height: auto;
+  height: 100%;
+  width: auto;
   object-fit: contain;
 }
 
@@ -125,14 +130,21 @@ img {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  width: 60%;
-  height: 11.25rem;
   border-radius: 1.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  gap: 1rem;  
-  padding: 1rem 1rem 1.75rem 1rem;
+  padding: 1rem 1rem 1.5rem 1rem;
   background-color: var(--component-color);
   color: var(--text-light);
+}
+
+#hourly-forecast {
+  grid-area: hourly-forecast;
+  gap: 0.5rem;
+}
+
+#atmospheric-conditions {
+  grid-area: atmospheric-conditions;
+  gap: 1rem;  
 }
 
 #hourly-forecast-title, #atmospheric-conditions-title {
@@ -142,7 +154,8 @@ img {
 
 #hourly-tiles {
   display: flex;
-  height: 100%;
+    justify-content: space-around;
+    height: 100%;
 }
 
 .hour-info {
@@ -150,7 +163,6 @@ img {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
 }
 
 .hour-info span {
@@ -161,16 +173,16 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35%;
-  height: auto;
+  height: 1.5rem;
+  width: auto;
 }
 
-.divider {
-  width: 0.125rem;
-  height: 75%;
+.vertical-divider {
+  width: 0.0625rem;
   background-color: grey;
   opacity: 0.25;
   align-self: center;
+  height: 75%;
 }
 
 #atmospheric-conditions-grid {
@@ -215,6 +227,44 @@ img {
   font-weight: 600;
 }
 
+#daily-forecast {
+  grid-area: daily-forecast;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 1rem 0 1rem 0;
+  gap: 1rem;  
+  color: var(--text-light);
+  background-color: var(--component-color);
+}
+
+#daily-forecast-title {
+  padding-left: 7.5%;
+  font-weight: bold;
+}
+
+#daily-tiles {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.day-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.horizontal-divider {
+  height: 0.0625rem;
+  background-color: grey;
+  opacity: 0.25;
+  align-self: center;
+  width: 85%;
+}
 
 #background {
   position: fixed;

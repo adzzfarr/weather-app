@@ -61,7 +61,7 @@ export async function renderAtmosphericConditions(searchedLocation) {
             if (condition === 'humidity' || condition === 'precipprob') {
                 conditionValue.textContent = conditionData + '%';
             } else if (condition === 'windspeed' ) {
-                conditionValue.textContent = conditionData + 'km/h';
+                conditionValue.textContent = conditionData + ' km/h';
             } else if (condition === 'uvindex') {
                 conditionValue.textContent = conditionData;
             }

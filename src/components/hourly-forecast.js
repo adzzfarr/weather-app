@@ -54,14 +54,14 @@ export async function renderHourlyForecast(searchedLocation) {
 
             const hourTemp = document.createElement('span');
             hourTemp.className = 'hour-temp';
-            hourTemp.textContent = temp + '°';
+            hourTemp.textContent = Math.round(temp) + '°';
             hourInfo.appendChild(hourTemp);
 
             hourlyForecastTilesDiv.appendChild(hourInfo);
 
             if (count < 5) {
                 const divider = document.createElement('div');
-                divider.className = 'divider';
+                divider.className = 'vertical-divider';
                 hourlyForecastTilesDiv.appendChild(divider);
             }
 

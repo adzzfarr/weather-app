@@ -5,6 +5,7 @@ import { renderOverview } from "./components/overview";
 import { updateBackground } from "./modules/update-background";
 import { renderHourlyForecast } from "./components/hourly-forecast";
 import { renderAtmosphericConditions } from "./components/atmospheric-conditions";
+import { renderDailyForecast } from "./components/daily-forecast";
 
 const content = document.getElementById('content');
 const input = document.querySelector('input');
@@ -26,6 +27,9 @@ search.addEventListener('click', async () => {
 
     const atmosphericConditions = await renderAtmosphericConditions(searchQuery);
     content.appendChild(atmosphericConditions);
+
+    const dailyForecast = await renderDailyForecast(searchQuery);
+    content.appendChild(dailyForecast);
 
     const dateTime = weatherData.currentConditions.datetime;
     const hour = parseInt(dateTime.slice(0, 3));

@@ -27,9 +27,9 @@ export async function renderOverview(searchedLocation) {
         const temperatures = document.createElement('div');
         temperatures.id = 'temperatures-text';
         const temp = document.createElement('span');
-        temp.textContent = currentConditions.temp + '°';
+        temp.textContent = Math.round(currentConditions.temp) + '°';
         const feelsLike = document.createElement('span');
-        feelsLike.textContent = 'Feels like ' + currentConditions.feelslike + '°';
+        feelsLike.textContent = 'Feels like ' + Math.round(currentConditions.feelslike) + '°';
         temperatures.appendChild(temp);
         temperatures.appendChild(feelsLike);
         textDiv.appendChild(temperatures);
