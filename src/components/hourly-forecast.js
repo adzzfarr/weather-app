@@ -1,5 +1,4 @@
 // hourly-forecast.js 
-
 export async function renderHourlyForecast(weatherData) {
     try {
         const dailyData = weatherData.days;

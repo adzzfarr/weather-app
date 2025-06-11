@@ -1,6 +1,4 @@
-
 // daily-forecast.js
-
 export async function renderDailyForecast(weatherData) {
     try {
         const dailyData = weatherData.days;

@@ -1,6 +1,5 @@
 // atmospheric-conditions.js
-
-export async function renderAtmosphericConditions(weatherData) {
+export function renderAtmosphericConditions(weatherData, unitGroup) {
     try {
         const currentConditions = weatherData.currentConditions;
 
@@ -59,7 +58,8 @@ export async function renderAtmosphericConditions(weatherData) {
             if (condition === 'humidity' || condition === 'precipprob') {
                 conditionValue.textContent = conditionData + '%';
             } else if (condition === 'windspeed' ) {
-                conditionValue.textContent = conditionData + ' km/h';
+                const speedUnit = unitGroup === 'uk' ? 'km/h' : 'mph'
+                conditionValue.textContent = conditionData + ' ' + speedUnit;
             } else if (condition === 'uvindex') {
                 conditionValue.textContent = conditionData;
             }
