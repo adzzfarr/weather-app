@@ -1,12 +1,8 @@
 // pop-up.js
-export function showPopUp(message, timeOut) {
+export function renderPopUp(message) {
     const popUp = document.createElement('div');
-    popUp.id = 'pop-up';
+    popUp.className = 'pop-up';
     popUp.textContent = message;
 
-    document.body.appendChild(popUp);
-
-    setTimeout(() => {
-        popUp.remove(); // Clean up after timeout
-    }, timeOut);
+    return popUp;
 }

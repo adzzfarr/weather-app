@@ -330,7 +330,7 @@ img {
   transition: background 3s ease-in-out, opacity 1s ease-in-out;
 }
 
-#pop-up {
+.pop-up {
   position: fixed;
   bottom: 1rem; 
   left: 50%;
@@ -343,6 +343,11 @@ img {
   font-size: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   animation: fadeInOut 3s ease-in-out;
+}
+
+.error-pop-up {
+  background-color: #e74c3c;
+  color: var(--text-light);
 }
 
 .fade-transition {

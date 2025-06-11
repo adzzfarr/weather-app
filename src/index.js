@@ -7,7 +7,7 @@ import { renderHourlyForecast } from "./components/hourly-forecast";
 import { renderAtmosphericConditions } from "./components/atmospheric-conditions";
 import { renderDailyForecast } from "./components/daily-forecast";
 import { renderSidebar } from "./components/sidebar";
-import { showPopUp } from "./components/pop-up";
+import { renderPopUp } from "./components/pop-up";
 
 document.addEventListener('DOMContentLoaded', runApp);
 
@@ -18,6 +18,10 @@ async function runApp() {
 
     renderSidebar(onClickHome, onClickToggleUnits);
 
+    const errorMessage = 'Please input a valid location.';
+    const errorPopUp = renderPopUp(errorMessage);
+    errorPopUp.classList.add('error-pop-up');
+
     const search = document.getElementById('search-button');
     search.addEventListener('click', async () => {
         const searchedLocation = input.value.toString().trim();
@@ -26,8 +30,9 @@ async function runApp() {
         try {
             const weatherData = await getWeatherData(searchedLocation, unitGroup);
             await renderContent(weatherData);
-        } catch (err) {
-            console.error("Failed to fetch weather data:", err);
+        } catch (error) {
+            console.log(error);
+            showPopUp(errorPopUp, 5000);
         }
     });
 
@@ -36,8 +41,14 @@ async function runApp() {
             const searchedLocation = input.value.trim();
             if (!searchedLocation) return;
             input.blur();
-            const weatherData = await getWeatherData(searchedLocation, unitGroup);
-            await renderContent(weatherData);
+
+            try {
+                const weatherData = await getWeatherData(searchedLocation, unitGroup);
+                await renderContent(weatherData);
+            } catch (error) {
+                console.log(error);
+                showPopUp(errorPopUp, 5000);
+            }
         }
     });
 
@@ -66,7 +77,8 @@ async function runApp() {
         } else {
             popUpMessage = 'Data will be shown in metric units.';
         }
-        showPopUp(popUpMessage, 3000);
+        const unitsPopUp = renderPopUp(popUpMessage);
+        showPopUp(unitsPopUp, 3000);
     }
 
     async function renderContent(weatherData) {
@@ -113,7 +125,6 @@ async function runApp() {
                 ? 'text-light' 
                 : 'text-dark';
         } catch (error) {
-            // Error display
             console.log(error);
         } finally {
             loadingSpinner.remove();
@@ -133,4 +144,12 @@ async function runApp() {
         const dailyForecast = document.getElementById('daily-forecast');
         if (dailyForecast) dailyForecast.remove()
     } 
+
+    function showPopUp(popUp, timeOut) {
+        document.body.appendChild(popUp);
+
+        setTimeout(() => {
+            popUp.remove();
+        }, timeOut);
+    }
 }

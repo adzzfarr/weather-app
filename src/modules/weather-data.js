@@ -11,6 +11,6 @@ export async function getWeatherData(location, unitGroup) {
         return data;
     } catch (error) {
         console.log(error);
-        return;
+        throw(error);
     }
 }
