@@ -70,36 +70,67 @@ async function runApp() {
     }
 
     async function renderContent(weatherData) {
-        content.innerHTML = '';
+        // Remove any old search content
+        removeWeatherComponents();
 
-        const overview = await renderOverview(weatherData);
-        overview.classList.add('fade-in');
-        overview.style.animationDelay = '0.1s';
-        content.appendChild(overview);
+        // Loading spinner
+        let loadingSpinner = document.getElementById('loading-spinner');
+        if (!loadingSpinner) {
+            loadingSpinner = document.createElement('div');
+            loadingSpinner.id = 'loading-spinner';
+            content.appendChild(loadingSpinner);
+        }
+        loadingSpinner.style.display = 'block';
 
-        const hourlyForecast = await renderHourlyForecast(weatherData);
-        hourlyForecast.classList.add('fade-in');
-        hourlyForecast.style.animationDelay = '0.3s';
-        content.appendChild(hourlyForecast);
+        try {   
+            const overview = await renderOverview(weatherData);
+            overview.classList.add('fade-in');
+            overview.style.animationDelay = '0.1s';
+            content.appendChild(overview);
 
-        const atmosphericConditions = renderAtmosphericConditions(weatherData, unitGroup);
-        atmosphericConditions.classList.add('fade-in');
-        atmosphericConditions.style.animationDelay = '0.6s';
-        content.appendChild(atmosphericConditions);
+            const hourlyForecast = await renderHourlyForecast(weatherData);
+            hourlyForecast.classList.add('fade-in');
+            hourlyForecast.style.animationDelay = '0.3s';
+            content.appendChild(hourlyForecast);
 
-        const dailyForecast = await renderDailyForecast(weatherData);
-        dailyForecast.classList.add('fade-in');
-        dailyForecast.style.animationDelay = '0.9s';
-        content.appendChild(dailyForecast);
+            const atmosphericConditions = renderAtmosphericConditions(weatherData, unitGroup);
+            atmosphericConditions.classList.add('fade-in');
+            atmosphericConditions.style.animationDelay = '0.6s';
+            content.appendChild(atmosphericConditions);
 
-        const dateTime = weatherData.currentConditions.datetime;
-        const hour = parseInt(dateTime.slice(0, 3));
-        const isDaytime = hour >= 6 && hour <= 18; 
-        const iconName = weatherData.currentConditions.icon;
-        updateBackground(iconName, isDaytime);  
+            const dailyForecast = await renderDailyForecast(weatherData);
+            dailyForecast.classList.add('fade-in');
+            dailyForecast.style.animationDelay = '0.9s';
+            content.appendChild(dailyForecast);
 
-        overview.className = (!isDaytime || iconName.includes('rain') || iconName.includes('thunder')) 
-            ? 'text-light' 
-            : 'text-dark';
+            const dateTime = weatherData.currentConditions.datetime;
+            const hour = parseInt(dateTime.slice(0, 3));
+            const isDaytime = hour >= 6 && hour <= 18; 
+            const iconName = weatherData.currentConditions.icon;
+            updateBackground(iconName, isDaytime);  
+
+            overview.className = (!isDaytime || iconName.includes('rain') || iconName.includes('thunder')) 
+                ? 'text-light' 
+                : 'text-dark';
+        } catch (error) {
+            // Error display
+            console.log(error);
+        } finally {
+            loadingSpinner.remove();
+        }
     }
+
+    function removeWeatherComponents() {
+        const overview = document.getElementById('overview');
+        if (overview) overview.remove();
+
+        const hourlyForecast = document.getElementById('hourly-forecast');
+        if (hourlyForecast) hourlyForecast.remove();
+
+        const atmosphericConditions = document.getElementById('atmospheric-conditions');
+        if (atmosphericConditions) atmosphericConditions.remove();
+
+        const dailyForecast = document.getElementById('daily-forecast');
+        if (dailyForecast) dailyForecast.remove()
+    } 
 }
