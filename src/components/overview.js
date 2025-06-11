@@ -1,9 +1,7 @@
 // overview.js
-import { getWeatherData } from "../modules/weather-data";
 
-export async function renderOverview(searchedLocation) {
+export async function renderOverview(weatherData) {
     try {
-        const weatherData = await getWeatherData(searchedLocation);
         const currentConditions = weatherData.currentConditions;
 
         const overviewDiv = document.createElement('div');

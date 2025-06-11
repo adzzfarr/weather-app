@@ -1,9 +1,7 @@
 // hourly-forecast.js 
-import { getWeatherData } from "../modules/weather-data";
 
-export async function renderHourlyForecast(searchedLocation) {
+export async function renderHourlyForecast(weatherData) {
     try {
-        const weatherData = await getWeatherData(searchedLocation);
         const dailyData = weatherData.days;
         const todayData = dailyData[0];
         const hourlyData = todayData.hours;

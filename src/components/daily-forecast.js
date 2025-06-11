@@ -1,10 +1,8 @@
 
 // daily-forecast.js
-import { getWeatherData } from "../modules/weather-data";
 
-export async function renderDailyForecast(searchedLocation) {
+export async function renderDailyForecast(weatherData) {
     try {
-        const weatherData = await getWeatherData(searchedLocation);
         const dailyData = weatherData.days;
 
         const dailyForecastDiv = document.createElement('div');

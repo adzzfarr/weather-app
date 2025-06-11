@@ -1,9 +1,7 @@
 // atmospheric-conditions.js
-import { getWeatherData } from "../modules/weather-data";
 
-export async function renderAtmosphericConditions(searchedLocation) {
+export async function renderAtmosphericConditions(weatherData) {
     try {
-        const weatherData = await getWeatherData(searchedLocation);
         const currentConditions = weatherData.currentConditions;
 
         const atmosphericConditionsDiv = document.createElement('div');
